@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html><head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+         <script src="jquery-3.4.1/jquery-3.4.1.min.js"></script>
+       
+        <title>使用 animate.css 制作流畅交互动效</title>
+        <link rel="stylesheet" type="text/css" href="animate.css">
+        <style type="text/css">
+            *{
+                transition: all 0.3s;}
+            html {
+                font-size: 62.5%;
+                font-family: 'Open Sans', 'Helvetica Neue', Arial, 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            }
+            body {
+                font-size: 1.8em;
+                line-height: 3;
+                background-color: #eeeeee;
+            }
+            h3 {
+                font-size: 1.8em;
+                margin-bottom: 3rem;
+                line-height: 1.5;
+                font-weight: 800;
+            }
+            p {
+                margin-bottom: 1.5rem;
+            }
+            .site-container {
+                max-width: 320px;
+                margin: 10px auto;
+                padding-left: 0.6em;
+                padding-right: 0.6em;
+                padding-top: 3%;
+                padding-bottom: 3%;
+            }
+            @media screen and (min-width: 60.063em) {
+                .site-container {
+                    max-width: 400px;
+                }
+            }
+            .card {
+                position: relative;
+                overflow: hidden;
+                background-color: white;
+                box-shadow: 0 1px 3px 0 rgba(0,0,0,0.24), 0 1px 18px 0 rgba(0,0,0,0.12);
+                border-radius: 2px;
+                padding: 1em 1.5em;
+            }
+            .form__wrapper {
+                transition: all 1s; 
+                overflow: hidden;
+                position: relative;
+                z-index: 1;
+                display: inline-block;
+                margin-bottom: 1.6rem;
+                width: 100%;
+                vertical-align: top;
+            }
+            .form__wrapper__submit {
+                padding: 1.6rem 0;
+            }
+            .form__input {
+                transition: all 1s; 
+                display: block;
+                position: relative;
+                margin-top: 1em;
+                padding: 0.84em 0;
+                width: 100%;
+                box-sizing: border-box;
+                color: #444;
+                font-size: 1.6rem;
+                outline: 0;
+                border: none;
+                border-bottom: solid 1px #ddd;
+            }
+            .form__input:focus {
+                background-position: 0 0;
+                color: #444;
+            }
+            .form__label {
+                transition: all 1s; 
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                padding: 0;
+                width: 100%;
+                height: calc(99%);
+                text-align: left;
+                pointer-events: none;
+                color: #999;
+            }
+            .form__label__content {
+                transition: all 1s; 
+                position: absolute;
+            }
+            .form__input:focus ~ .form__label .form__label-content,
+            .form--filled .form__label-content {
+            }
+            .btn {transition: all 1s; 
+                 animation-iteration-count: infinite;
+                width: 100%;
+                display: inline-block;
+                padding: 0.7em 1.5em;
+                border-radius: 2px;
+                background-color: #2196f3;
+                color: #fff;
+                border: 0;
+                outline: none;
+                cursor: pointer;
+                font-family: inherit;
+                font-weight: 400;
+                font-size: 1.6rem;
+                box-shadow: 0 1px 3px 0 rgba(3,30,51,0.24), 0 1px 2px 0 rgba(3,30,51,0.12);
+                transition: all 0.2s ease;
+            }
+            .btn:focus,
+            .btn:hover {
+                background-color: #0d8aee;
+            }
+            .move{
+                transition: transform 1s;
+                transform: 1s;
+                animation: move 0.4s;
+                animation-fill-mode: forwards;
+            }
+            .back{
+                transition: transform 1s;
+                transform: 1s;
+                animation: amove 0.5s;
+                animation-fill-mode: forwards;
+            }
+            .black1{
+               
+                height: 1px;
+                width: 100%;
+             background-color:#2196f3;
+             opacity: 0;
+            }
+            .black2{
+                
+                height: 1px;
+                width: 100%;
+             background-color:#2196f3;
+             opacity: 0;
+            }
+            @keyframes move{
+               0%{top: 0px;}
+               50%{top: -5px;}
+               100%{top: -10px;}
+            }
+            @keyframes amove{
+                0%{top: -15px;}
+               50%{top: -5px;}
+               100%{top: 0px;}
+            }
+        </style>
+    </head>
+    <body>
+        <section class="site-container">
+            <section class="card">
+                <h3>Login</h3>
+                <form>
+                    <div class="form__wrapper" data-wow-delay="0.5s">
+                        <input type="email" class="form__input" id="email" name="email">
+                        <label class="form__label" for="email">
+                        <span class="form__label__content" id="eee">Email</span>
+                        </label>
+                        <div class="black1"></div>
+                    </div>
+                    <div class="form__wrapper" data-wow-delay="0.6s">
+                        <input type="password" class="form__input" id="password" name="password">
+                        <label class="form__label" for="password">
+                        <span class="form__label__content" id="ppp" >Password</span>
+                        </label>
+                        <div class="black2"></div>
+                    </div>
+                    <div class="form__wrapper__submit pulse infinite" data-wow-delay="0.7s">
+                        <div class="form__input__submit">
+                            <button type="submit" name="submit" class="btn">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </section>
+      <script type="text/javascript">
+             $("#email").focus(function(){
+                $('#eee').addClass('move');
+                $('#eee').removeClass('amove');
+                $('.black1').css("opacity","1");
+             });
+             $("#password").focus(function(){
+                $('#ppp').addClass('move');
+                $('#ppp').removeClass('amove');
+                $('.black2').css("opacity","1");
+             });
+             $("#email").blur(function(){
+                 $('.black1').css("opacity","0");
+                 if(!($("#email").val().trim())){
+                    $('#eee').addClass('amove');
+                     $('#eee').removeClass('move');
+                 }
+                 btn(1);
+             });
+              $("#password").blur(function(){
+                 $('.black2').css("opacity","0");
+                 if(!($("#password").val().trim())){
+                    $('#ppp').addClass('amove');
+                     $('#ppp').removeClass('move');
+                 }
+                 btn(2);
+             });
+              function btn(num){
+                    if($("#password").val().trim()&& $("#email").val().trim())
+                    {
+                        $(".btn").addClass("animated pulse");
+                    }
+
+              };
+         </script>
+   
+</body></html>
